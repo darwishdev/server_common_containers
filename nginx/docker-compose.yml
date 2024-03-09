@@ -1,0 +1,20 @@
+version: "3"
+services:
+  nginx:
+    image: nginx
+    container_name: nginx
+    restart: always
+
+    volumes:
+      - /etc/letsencrypt/:/etc/letsencrypt
+      # - /root/common/static:/usr/share/nginx/html:ro
+      - /root/apps/clients:/usr/share/nginx/html:ro
+      - ./conf.d:/etc/nginx/conf.d/:ro
+    ports:
+      - "80:80"
+      - "443:443"
+
+networks:
+  default:
+    external: true
+    name: nginx
